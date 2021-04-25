@@ -378,10 +378,10 @@
         document.getElementById('tokenimg').src = payload[0];
         for (let i = 1; i < 12; i++) {
             if (payload[i].change > 0) { 
-                document.getElementById(`change${i-1}`).style.color = "#0a0"; 
+                document.getElementById(`change${i-1}`).style.color = "#0d0"; 
                 document.getElementById(`change${i-1}`).innerHTML = `+$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
             } else if (payload[i].change < 0) { 
-                document.getElementById(`change${i-1}`).style.color = "#a00"; 
+                document.getElementById(`change${i-1}`).style.color = "#d00"; 
                 document.getElementById(`change${i-1}`).innerHTML = `-$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
             } else {
                 document.getElementById(`change${i-1}`).style.color = "#000"; 
