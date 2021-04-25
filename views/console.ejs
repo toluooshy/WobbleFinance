@@ -1,0 +1,403 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Wobble Finance</title>
+    <link rel='icon' type='image/png' href='favicon.ico'>
+    <style type='text/css' media='screen'>
+        @font-face {
+            font-family: 'Lobster';
+            src: url('Lobster-Regular.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Bowman';
+            src: url('Bowman.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'Bowman', serif;
+            color: #eeeeee;
+            background-color: #110011;
+            text-decoration-color: #ffffff;
+            margin: auto;
+            padding: 0;
+        }
+        .navbar {
+            overflow: hidden;
+            background-image: linear-gradient(to right, #320050, #8200C8);
+            font-family: 'Lobster', serif;
+            font-size: medium;
+        }
+        .navbar a {
+            float: left;
+            color: #eeeeee;
+            text-align: center;
+            padding: 14px 14px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+        .navbar a:hover {
+            background-color: #160025;
+            color: #ffffff;
+        }
+        .navbar a.active {
+            background-image: #222222;
+            color: #ffffff;
+        }
+        .footbar {
+            color: #ffffff;
+            background-color: #111111;
+            text-align: right;
+            overflow: hidden;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 5px 0px;
+            font-size: 12px;
+        }
+        .maincontainer {
+            position: absolute;
+            color: #320050;
+            font-size: medium;
+            justify-self: center;
+            background-color: rgba(255,255,255,.9);
+            margin: 0% 10% 0% 10%;
+            width: 80%;
+            height: 200px;
+            border-radius: 5px;
+            box-shadow:
+                0 0 0 4px #320050;
+        }
+        .tokencontainer {
+            position: absolute;
+            color: #320050;
+            font-size: small;
+            justify-self: center;
+            background-color: rgba(255,255,255,.5);
+            margin: 0% 10% 0% 10%;
+            width: 80%;
+            height: 50px;
+            border-radius: 5px;
+            box-shadow:
+                0 0 0 4px #320050;
+        }
+        p {
+            margin: .5% 1% .5% 1%;
+        }
+    </style>
+    <script src='https://d3js.org/d3.v5.min.js' charset='utf-8'></script>
+</head> 
+  
+<body>
+    <div class='navbar'>
+        <a class='active' href='/'>Wobble Finance 🧬</a>
+        <a style='float: right;' href='about'>About ⚛️</a>
+    </div>
+    
+    </br>
+    <div class='maincontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 22%;">
+                <col span="1" style="width: 25%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 20%;">
+                <col span="1" style="width: 18%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img id="tokenimg" src="WBBL.png" alt="Cryptocurrency Logo" width="192" height="192" style="margin: 0% 5% 1.25% 5%"/></td>
+                    <td><p>Cryptocurrency:</p><p id="name0" style="font-size: large">Name (Symbol)</p></td>
+                    <td><p>Current Price:</p><p id="price0" style="font-size: large">Price (USD)</p></td>
+                    <td><p>Currency Change (%):</p><p id="change0" style="font-size: large">1HR Change (USD)</p></td>
+                    <td><p>Volume:</p><p id="volume0" style="font-size: large">Avg. 24HR Exchange Volume (USD)</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="WBBL.png" alt="Wobble Finance Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p>Name (Symbol)</p></td>
+                    <td></td>
+                    <td><p>Price</p></td>
+                    <td><p>1HR Change</p></td>
+                    <td><p>Avg. 24HR Volume</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="BTC.png" alt="Bitcoin Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name1">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price1">$0.000000000000000000</p></td>
+                    <td><p id="change1">$0.000000000000000000</p></td>
+                    <td><p id="volume1">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="ETH.png" alt="Ethereum Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name2">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price2">$0.000000000000000000</p></td>
+                    <td><p id="change2">$0.000000000000000000</p></td>
+                    <td><p id="volume2">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="BNB.png" alt="Binance Coin Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name3">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price3">$0.000000000000000000</p></td>
+                    <td><p id="change3">$0.000000000000000000</p></td>
+                    <td><p id="volume3">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="XRP.png" alt="Ripple Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name4">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price4">$0.000000000000000000</p></td>
+                    <td><p id="change4">$0.000000000000000000</p></td>
+                    <td><p id="volume4">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="ADA.png" alt="Cardano Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name5">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price5">$0.000000000000000000</p></td>
+                    <td><p id="change5">$0.000000000000000000</p></td>
+                    <td><p id="volume5">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="DOT.png" alt="Polkadot Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name6">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price6">$0.000000000000000000</p></td>
+                    <td><p id="change6">$0.000000000000000000</p></td>
+                    <td><p id="volume6">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="UNI.png" alt="Uniswap Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name7">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price7">$0.000000000000000000</p></td>
+                    <td><p id="change7">$0.000000000000000000</p></td>
+                    <td><p id="volume7">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="CAKE.png" alt="Pancakeswap Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name8">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price8">$0.000000000000000000</p></td>
+                    <td><p id="change8">$0.000000000000000000</p></td>
+                    <td><p id="volume8">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="LINK.png" alt="Chainlink Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name9">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price9">$0.000000000000000000</p></td>
+                    <td><p id="change9">$0.000000000000000000</p></td>
+                    <td><p id="volume9">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+    <br/><br/><br/><br/>
+    <div class='tokencontainer'>
+        <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 5%;">
+                <col span="1" style="width: 15%;">
+                <col span="1" style="width: 40%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 12.5%;">
+                <col span="1" style="width: 15%;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><img src="DOGE.png" alt="Dogecoin Logo" width="42" height="42" style="margin: .25% 1% .25% 1%"/></td>
+                    <td><p id="name10">Wobble Finance (WBBL)</p></td>
+                    <td></td>
+                    <td><p id="price10">$0.000000000000000000</p></td>
+                    <td><p id="change10">$0.000000000000000000</p></td>
+                    <td><p id="volume10">$0.000000000000000000</p></td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+    <br/><br/><br/><br/><br/> 
+
+    <script>
+        var payload = <%- JSON.stringify(data) %>;
+        console.log(payload);
+        document.getElementById('tokenimg').src = payload[0];
+        for (let i = 1; i < 12; i++) {
+            if (payload[i].change > 0) { 
+                document.getElementById(`change${i-1}`).style.color = "#0a0"; 
+                document.getElementById(`change${i-1}`).innerHTML = `+$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
+            } else if (payload[i].change < 0) { 
+                document.getElementById(`change${i-1}`).style.color = "#a00"; 
+                document.getElementById(`change${i-1}`).innerHTML = `-$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
+            } else {
+                document.getElementById(`change${i-1}`).style.color = "#000"; 
+                document.getElementById(`change${i-1}`).innerHTML = `N/A`
+            }
+            document.getElementById(`name${i-1}`).innerHTML = `${payload[i].name} (${payload[i].symbol})`;
+            document.getElementById(`price${i-1}`).innerHTML = payload[i].price != '' ? `$${payload[i].price}` : `N/A`;
+            document.getElementById(`volume${i-1}`).innerHTML = payload[i].volume != '' ? `$${payload[i].volume}` : `N/A`;
+        }
+    </script>
+</body>
+
+<footer>
+    <div class='footbar'>
+        Wobble Finance © 2021 &nbsp;
+    </div>
+</footer>
+  
+</html> 

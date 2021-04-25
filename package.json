@@ -1,0 +1,32 @@
+{
+  "name": "wobblefinance",
+  "version": "1.0.0",
+  "description": "The Comprehensive Wobble Finance Cryptocurrency Screener",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "heroku"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toluooshy/WobbleFinance.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toluooshy/WobbleFinance/issues"
+  },
+  "homepage": "https://github.com/toluooshy/WobbleFinance#readme",
+  "dependencies": {
+    "crypto-price": "^0.0.6",
+    "crypto-symbol": "^1.0.17",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
