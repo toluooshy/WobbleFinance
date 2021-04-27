@@ -8,6 +8,9 @@ const app = express();
 const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
 const CoinGeckoList = require('coinlist');
+const CoinGeckoJSON = require('./coins.json');
+
+console.log();
 
 const { loadbtc, loadeth, loadbnb, loadxrp, loadada, loaddot, loaduni, loadcake, loadlink, loaddoge } = require('./loadcurrencies');
 
@@ -28,9 +31,7 @@ loadbtc(payload); loadeth(payload); loadbnb(payload); loadxrp(payload); loadada(
 
 app.post('/screener', function(req, res) {
   async function fetch() {
-    // var coin = CoinGeckoList.get(req.body.symbol.toLowerCase()).id;
-    var coin = { 'algo': 'algorand', 'crv': 'curve-dao-token', 'build': 'build-finance' };
-    await CoinGeckoClient.coins.fetch(coin[req.body.symbol.toLowerCase()], { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch(CoinGeckoJSON.find(doc => doc.symbol == req.body.symbol).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
       payload[0] = {
         name: obj.data.name,
         symbol: obj.data.symbol,
