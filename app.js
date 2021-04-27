@@ -28,7 +28,7 @@ loadbtc(payload); loadeth(payload); loadbnb(payload); loadxrp(payload); loadada(
 
 app.post('/screener', function(req, res) {
   async function fetch() {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get(req.body.symbol.toLowerCase()).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('algorand', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
       payload[0] ={
         name: obj.data.name,
         symbol: obj.data.symbol,
