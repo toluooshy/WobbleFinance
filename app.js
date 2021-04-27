@@ -40,7 +40,7 @@ app.post('/screener', function(req, res) {
     }).catch(err => {
       console.log(err);
     });
-    console.log(payload);
+    // console.log(payload);
     res.render('screener', {data:payload});
   } 
   fetch();
