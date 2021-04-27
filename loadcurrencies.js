@@ -3,7 +3,7 @@ const CoinGeckoClient = new CoinGecko();
 const CoinGeckoList = require('coinlist');
 
 async function loadbtc(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('btc').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('bitcoin', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[1] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -18,7 +18,7 @@ async function loadbtc(payload) {
 }
 
 async function loadeth(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('eth').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('ethereum', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[2] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -33,7 +33,7 @@ async function loadeth(payload) {
 }
 
 async function loadbnb(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('bnb').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('binancecoin', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[3] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -48,7 +48,7 @@ async function loadbnb(payload) {
 }
 
 async function loadxrp(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('xrp').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('ripple', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[4] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -63,7 +63,7 @@ async function loadxrp(payload) {
 }
 
 async function loadada(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('ada').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('cardano', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[5] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -78,7 +78,7 @@ async function loadada(payload) {
 }
 
 async function loaddot(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('dot').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('polkadot', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[6] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -93,7 +93,7 @@ async function loaddot(payload) {
 }
 
 async function loaduni(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('uni').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('uniswap', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[7] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -108,7 +108,7 @@ async function loaduni(payload) {
 }
 
 async function loadcake(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('cake').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('pancakeswap-token', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[8] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -123,7 +123,7 @@ async function loadcake(payload) {
 }
 
 async function loadlink(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('link').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('chainlink', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[9] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
@@ -138,7 +138,7 @@ async function loadlink(payload) {
 }
 
 async function loaddoge(payload) {
-    await CoinGeckoClient.coins.fetch(CoinGeckoList.get('doge').id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+    await CoinGeckoClient.coins.fetch('dogecoin', { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload[10] = {
             name: obj.data.name,
             symbol: obj.data.symbol,
