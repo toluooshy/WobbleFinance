@@ -1,14 +1,17 @@
-const CoinGecko = require('coingecko-api');
-const CoinGeckoClient = new CoinGecko();
-const CoinGeckoList = require('coinlist');
-console.log(CoinGeckoList.get('btc').id)
-
 const express = require('express');
 const https = require('https');
 const path = require('path');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 const app = express();
+
+const CoinGecko = require('coingecko-api');
+const CoinGeckoClient = new CoinGecko();
+const CoinGeckoList = require('coinlist');
+
+const { loadbtc, loadeth, loadbnb, loadxrp, loadada, loaddot, loaduni, loadcake, loadlink, loaddoge } = require('./loadcurrencies');
+
+var payload = [{},{},{},{},{},{},{},{},{},{},{}];
   
 app.set('views', path.join(__dirname, 'views'));
 
@@ -21,42 +24,25 @@ app.set('view engine', 'ejs');
 
 app.use('/', routes);
 
+loadbtc(payload); loadeth(payload); loadbnb(payload); loadxrp(payload); loadada(payload); loaddot(payload); loaduni(payload); loadcake(payload); loadlink(payload); loaddoge(payload);
+
 app.post('/screener', function(req, res) {
-  async function fetch(){
-    var payload = ['WAGMI!!!'];
+  async function fetch() {
     await CoinGeckoClient.coins.fetch(CoinGeckoList.get(req.body.symbol.toLowerCase()).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
-      payload.push({
+      payload[0] ={
         name: obj.data.name,
         symbol: obj.data.symbol,
         image: obj.data.image['large'],
         price: obj.data.market_data.current_price['usd'],
         change: obj.data.market_data.price_change_24h,
         volume: obj.data.market_data.total_volume['usd']
-      });
+      };
     }).catch(err => {
       console.log(err);
     });
-
-    const symbols = ['BTC', 'ETH', 'BNB', 'XRP', 'ADA', 'DOT', 'UNI', 'CAKE', 'LINK', 'DOGE'];
-    const names = ['Bitcoin', 'Ethereum', 'Binance Coin', 'Ripple', 'Cardano', 'Polkadot', 'Uniswap', 'Pancakeswap', 'Chainlink', 'Dogecoin'];
-
-    for (let i = 0; i < 10; i ++) {
-      await CoinGeckoClient.coins.fetch(CoinGeckoList.get(symbols[i].toLowerCase()).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
-        payload.push({
-          name: obj.data.name,
-          symbol: obj.data.symbol,
-          image: obj.data.image['large'],
-          price: obj.data.market_data.current_price['usd'],
-          change: obj.data.market_data.price_change_24h,
-          volume: obj.data.market_data.total_volume['usd']
-        });
-      }).catch(err => {
-        console.log(err);
-      });
-    }
-    // console.log(payload);
+    console.log(payload);
     res.render('screener', {data:payload});
-  }
+  } 
   fetch();
 });
 

@@ -375,22 +375,22 @@
     <script>
         var payload = <%- JSON.stringify(data) %>;
         console.log(payload);
-        document.getElementById('tokenimg').src = payload[1].image;
-        for (let i = 1; i < 12; i++) {
+        document.getElementById('tokenimg').src = payload[0].image;
+        for (let i = 0; i < 12; i++) {
             if (payload[i].change > 0) { 
-                document.getElementById(`change${i-1}`).style.color = "#050"; 
-                document.getElementById(`change${i-1}`).innerHTML = `+$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
+                document.getElementById(`change${i}`).style.color = "#050"; 
+                document.getElementById(`change${i}`).innerHTML = `+$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
             } else if (payload[i].change < 0) { 
-                document.getElementById(`change${i-1}`).style.color = "#d00"; 
-                document.getElementById(`change${i-1}`).innerHTML = `-$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
+                document.getElementById(`change${i}`).style.color = "#d00"; 
+                document.getElementById(`change${i}`).innerHTML = `-$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
             } else {
-                document.getElementById(`change${i-1}`).style.color = "#000"; 
-                document.getElementById(`change${i-1}`).innerHTML = `N/A`
+                document.getElementById(`change${i}`).style.color = "#000"; 
+                document.getElementById(`change${i}`).innerHTML = `N/A`
             }
 
-            document.getElementById(`name${i-1}`).innerHTML = `${payload[i].name} (${payload[i].symbol.toUpperCase()})`;
-            document.getElementById(`price${i-1}`).innerHTML = payload[i].price != '' ? `$${payload[i].price}` : `N/A`;
-            document.getElementById(`volume${i-1}`).innerHTML = payload[i].volume != '' ? `$${payload[i].volume}` : `N/A`;
+            document.getElementById(`name${i}`).innerHTML = `${payload[i].name} (${payload[i].symbol.toUpperCase()})`;
+            document.getElementById(`price${i}`).innerHTML = payload[i].price != '' ? `$${payload[i].price}` : `N/A`;
+            document.getElementById(`volume${i}`).innerHTML = payload[i].volume != '' ? `$${payload[i].volume}` : `N/A`;
         }
     </script>
 </body>
