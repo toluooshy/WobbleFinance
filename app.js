@@ -1,6 +1,7 @@
 const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
 const CoinGeckoList = require('coinlist');
+console.log(CoinGeckoList.get('btc').id)
 
 const express = require('express');
 const https = require('https');
