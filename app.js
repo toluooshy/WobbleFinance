@@ -1,4 +1,6 @@
-const { symbolOf, nameOf } = require ('crypto-symbol');
+const CoinGecko = require('coingecko-api');
+const CoinGeckoClient = new CoinGecko();
+const CoinGeckoList = require('coinlist');
 
 const express = require('express');
 const https = require('https');
@@ -18,58 +20,55 @@ app.set('view engine', 'ejs');
 
 app.use('/', routes);
 
-app.post('/console', function(req, res) {
+app.post('/screener', function(req, res) {
   async function fetch(){
-    var payload = [];
-    payload.push(`https://cryptologos.cc/logos/${nameOf(req.body.symbol).toLowerCase().replace(/ /g, '-')}-${req.body.symbol.toLowerCase()}-logo.png`);
-    let price = require('crypto-price');
-    await price.getCryptoPrice('USD', req.body.symbol).then(obj => {
+    var payload = ['WAGMI!!!'];
+    await CoinGeckoClient.coins.fetch(CoinGeckoList.get(req.body.symbol.toLowerCase()).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
       payload.push({
-        symbol: req.body.symbol.toUpperCase(),
-        name: nameOf(req.body.symbol),
-        price: obj.price,
-        change: obj.change,
-        volume: obj.volume
+        name: obj.data.name,
+        symbol: obj.data.symbol,
+        image: obj.data.image['large'],
+        price: obj.data.market_data.current_price['usd'],
+        change: obj.data.market_data.price_change_24h,
+        volume: obj.data.market_data.total_volume['usd']
       });
     }).catch(err => {
-      console.log(err)
+      console.log(err);
     });
+
     const symbols = ['BTC', 'ETH', 'BNB', 'XRP', 'ADA', 'DOT', 'UNI', 'CAKE', 'LINK', 'DOGE'];
     const names = ['Bitcoin', 'Ethereum', 'Binance Coin', 'Ripple', 'Cardano', 'Polkadot', 'Uniswap', 'Pancakeswap', 'Chainlink', 'Dogecoin'];
+
     for (let i = 0; i < 10; i ++) {
-      await price.getCryptoPrice('USD', symbols[i]).then(obj => {
+      await CoinGeckoClient.coins.fetch(CoinGeckoList.get(symbols[i].toLowerCase()).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
         payload.push({
-          symbol: symbols[i],
-          name: names[i],
-          price: obj.price,
-          change: obj.change,
-          volume: obj.volume
+          name: obj.data.name,
+          symbol: obj.data.symbol,
+          image: obj.data.image['large'],
+          price: obj.data.market_data.current_price['usd'],
+          change: obj.data.market_data.price_change_24h,
+          volume: obj.data.market_data.total_volume['usd']
         });
       }).catch(err => {
-        console.log(err)
+        console.log(err);
       });
     }
-    res.render('console', {data:payload});
+    // console.log(payload);
+    res.render('screener', {data:payload});
   }
   fetch();
 });
 
 app.use('/', function(req, res, next){
   res.status(404);
-
-  // respond with html page
   if (req.accepts('html')) {
     res.render('404', { url: req.url });
     return;
   }
-
-  // respond with json
   if (req.accepts('json')) {
     res.send({ error: 'Not found' });
     return;
   }
-
-  // default to plain-text. send()
   res.type('txt').send('Not found');
 });
 

@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/toluooshy/WobbleFinance#readme",
   "dependencies": {
+    "coingecko-api": "^1.0.10",
+    "coinlist": "^3.1.2",
     "crypto-price": "^0.0.6",
     "crypto-symbol": "^1.0.17",
     "ejs": "^3.1.6",
