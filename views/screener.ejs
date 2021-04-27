@@ -3,99 +3,17 @@
 <head> 
     <title>Wobble Finance</title>
     <link rel='icon' type='image/png' href='favicon.ico'>
-    <style type='text/css' media='screen'>
-        @font-face {
-            font-family: 'Lobster';
-            src: url('Lobster-Regular.ttf');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Bowman';
-            src: url('NovaMono-Regular.ttf');
-            font-weight: normal;
-            font-style: normal;
-        }
-        body {
-            font-family: 'Bowman', serif;
-            color: #eeeeee;
-            background-color: #110011;
-            text-decoration-color: #ffffff;
-            margin: auto;
-            padding: 0;
-        }
-        .navbar {
-            overflow: hidden;
-            background-image: linear-gradient(to right, #320050, #8200C8);
-            font-family: 'Lobster', serif;
-            font-size: medium;
-        }
-        .navbar a {
-            float: left;
-            color: #eeeeee;
-            text-align: center;
-            padding: 14px 14px;
-            text-decoration: none;
-            font-size: 25px;
-        }
-        .navbar a:hover {
-            background-color: #160025;
-            color: #ffffff;
-        }
-        .navbar a.active {
-            background-image: #222222;
-            color: #ffffff;
-        }
-        .footbar {
-            color: #ffffff;
-            background-color: #111111;
-            text-align: right;
-            overflow: hidden;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            padding: 5px 0px;
-            font-size: 12px;
-        }
-        .maincontainer {
-            position: absolute;
-            color: #320050;
-            font-size: medium;
-            justify-self: center;
-            background-color: rgba(255,255,255,1);
-            margin: 0% 10% 0% 10%;
-            width: 80%;
-            height: 200px;
-            border-radius: 5px;
-            box-shadow:
-                0 0 0 4px #320050;
-        }
-        .tokencontainer {
-            position: absolute;
-            color: #320050;
-            font-size: small;
-            justify-self: center;
-            background-color: rgba(255,255,255,.5);
-            margin: 0% 10% 0% 10%;
-            width: 80%;
-            height: 50px;
-            border-radius: 5px;
-            box-shadow:
-                0 0 0 4px #320050;
-        }
-        p {
-            margin: .5% 1% .5% 1%;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <script src='https://d3js.org/d3.v5.min.js' charset='utf-8'></script>
 </head> 
   
 <body>
     <div class='navbar'>
         <a class='active' href='/'>Wobble Finance 🧬</a>
+        <a style='float: right;' href='https://testnet.bscscan.com/token/0xe7e6a09d3e3d785587fadb2d2d7d759e73464205'>Trade 💸</a>
+        <a style='float: right;' href='learn'>Learn 📓</a>
         <a style='float: right;' href='about'>About ⚛️</a>
     </div>
-    
     </br>
     <div class='maincontainer'>
         <table style="width: 100%">
@@ -381,7 +299,7 @@
                 document.getElementById(`change${i}`).style.color = "#050"; 
                 document.getElementById(`change${i}`).innerHTML = `+$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
             } else if (payload[i].change < 0) { 
-                document.getElementById(`change${i}`).style.color = "#d00"; 
+                document.getElementById(`change${i}`).style.color = "#500"; 
                 document.getElementById(`change${i}`).innerHTML = `-$${Math.abs(payload[i].change)} (${((payload[i].change)/(payload[i].price)).toFixed(2)}%)`
             } else {
                 document.getElementById(`change${i}`).style.color = "#000"; 

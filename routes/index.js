@@ -9,6 +9,10 @@ router.get('/about', (req, res) => {
   res.render('about');
 });
 
+router.get('/learn', (req, res) => {
+  res.render('learn');
+});
+
 router.get('/screener', (req, res) => {
   var payload = `empty`;
   res.render('screener', {data:payload});
