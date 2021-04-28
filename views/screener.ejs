@@ -293,6 +293,7 @@
     <script>
         var payload = <%- JSON.stringify(data) %>;
         console.log(payload);
+        console.clear();
         document.getElementById('tokenimg').src = payload[0].image;
         for (let i = 0; i < 11; i++) {
             if (payload[i].change > 0) { 
