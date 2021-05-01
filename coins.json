@@ -2911,7 +2911,7 @@
 	},
 	{
 	  "id": "avalanche-2",
-	  "symbol": "AVAX",
+	  "symbol": "avax",
 	  "name": "Avalanche"
 	},
 	{
@@ -3348,11 +3348,6 @@
 	  "id": "basis-cash",
 	  "symbol": "bac",
 	  "name": "Basis Cash"
-	},
-	{
-	  "id": "basis-coin-cash",
-	  "symbol": "bcc",
-	  "name": "Basis Coin Cash"
 	},
 	{
 	  "id": "basiscoin-share",

@@ -31,20 +31,25 @@ loadbtc(payload); loadeth(payload); loadbnb(payload); loadxrp(payload); loadada(
 
 app.post('/screener', function(req, res) {
   async function fetch() {
-    await CoinGeckoClient.coins.fetch(CoinGeckoJSON.find(doc => doc.symbol == req.body.symbol).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
-      payload[0] = {
-        name: obj.data.name,
-        symbol: obj.data.symbol,
-        image: obj.data.image['large'],
-        price: obj.data.market_data.current_price['usd'],
-        change: obj.data.market_data.price_change_24h,
-        volume: obj.data.market_data.total_volume['usd']
-      };
-    }).catch(err => {
-      console.log(err);
-    });
-    // console.log(payload);
-    res.render('screener', {data:payload});
+    symbol = req.body.symbol.toLowerCase();
+    if (typeof CoinGeckoJSON.find(doc => doc.symbol == symbol) == 'undefined') {
+      res.sendFile(__dirname + "/" + "html/error.html");
+    } else {
+      await CoinGeckoClient.coins.fetch(CoinGeckoJSON.find(doc => doc.symbol == symbol).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
+        payload[0] = {
+          name: obj.data.name,
+          symbol: obj.data.symbol,
+          image: obj.data.image['large'],
+          price: obj.data.market_data.current_price['usd'],
+          change: obj.data.market_data.price_change_24h,
+          volume: obj.data.market_data.total_volume['usd']
+        };
+      }).catch(err => {
+        console.log(err);
+      });
+      // console.log(payload);
+      res.render('screener', {data: payload});
+    }
   } 
   fetch();
 });

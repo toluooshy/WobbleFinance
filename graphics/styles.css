@@ -77,6 +77,10 @@ body {
     box-shadow:
         0 0 0 4px #320050;
 }
+.invisible {
+    display: none;
+    visibility: hidden;
+}
 p {
     margin: .5% 1% .5% 1%;
 }
