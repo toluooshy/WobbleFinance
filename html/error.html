@@ -1,38 +1,63 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
+<!DOCTYPE html>
+<html>
+  <head>
     <title>Wobble Finance</title>
-    <link rel='icon' type='image/png' href='favicon.ico'>
-    <link rel="stylesheet" href="styles.css">
-    <script src='https://d3js.org/d3.v5.min.js' charset='utf-8'></script>
-</head> 
-  
-<body>
-    <div class='navbar'>
-        <a class='active' href='/'>Wobble Finance ⚛️</a>
-        <a style='float: right;' href='about'>About 🧬</a>
-        <a style='float: right;' href='https://bscscan.com/token/0xe7e6a09d3e3d785587fadb2d2d7d759e73464205'>BscScan 📝</a>
-        <a style='float: right;' href='https://exchange.pancakeswap.finance/#/swap?outputCurrency=0xe7e6a09d3e3d785587fadb2d2d7d759e73464205&inputCurrency=BNB'>Trade 💸</a>
-        <a style='float: right;' href='learn'>Learn 📓</a>
-    </div>
-    <h1 style='text-align: center; font-family: Lobster, serif;'>Welcome To Wobble Finance!</h1>
-    <p style='text-align: center; font-style: italic;'>Working To Make Cryptocurrency More Accessible.</p>
-    <div style='text-align: center;' id='contact'>
-        <form style='text-align: center; background: rgba(22,0,37,0.5); padding: 20px; border: 2px dashed #ffffff;' action='/screener' method='POST'>
-            <img style='width: 300px; height: 300px;' src='WBBL.png' alt='Wobble Finance Logo'>
-            <h6 id='errormsg' style='color: #ffee00;'> The entered cryptocurrency could not be found. Always make sure to double check that your symbol is correct! 💫 </h6>
-        </form>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-    </div>
-</body>
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+  </head>
 
-<footer>
-    <div class='footbar'>
-        Wobble Finance © 2021 &nbsp;
+  <body>
+    <div class="navbar">
+      <a class="active" href="/">Wobble Finance ⚛️</a>
+      <a style="float: right" href="about">About 🧬</a>
+      <a
+        style="float: right"
+        href="https://bscscan.com/token/0xe7e6a09d3e3d785587fadb2d2d7d759e73464205"
+        >BscScan 📝</a
+      >
+      <a
+        style="float: right"
+        href="https://pancakeswap.finance/swap?inputCurrency=0xE7E6A09D3e3d785587FADb2D2D7d759e73464205&outputCurrency=BNB"
+        >Trade 💸</a
+      >
+      <a style="float: right" href="learn">Learn 📓</a>
     </div>
-</footer>
-  
-</html> 
+    <h1 style="text-align: center; font-family: Lobster, serif">
+      Welcome To Wobble Finance!
+    </h1>
+    <p style="text-align: center; font-style: italic">
+      Working To Make Cryptocurrency More Accessible.
+    </p>
+    <div style="text-align: center" id="contact">
+      <form
+        style="
+          text-align: center;
+          background: rgba(22, 0, 37, 0.5);
+          padding: 20px;
+          border: 2px dashed #ffffff;
+        "
+        action="/screener"
+        method="POST"
+      >
+        <img
+          style="width: 300px; height: 300px"
+          src="WBBL.png"
+          alt="Wobble Finance Logo"
+        />
+        <h6 id="errormsg" style="color: #ffee00">
+          The entered cryptocurrency could not be found. Always make sure to
+          double check that your symbol is correct! 💫
+        </h6>
+      </form>
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+  </body>
+
+  <footer>
+    <div class="footbar">Wobble Finance © 2021 &nbsp;</div>
+  </footer>
+</html>

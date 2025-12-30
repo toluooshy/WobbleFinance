@@ -1,86 +1,82 @@
 @font-face {
-    font-family: 'Lobster';
-    src: url('Lobster-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Lobster";
+  src: url("Lobster-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: 'NovaMono';
-    src: url('NovaMono-Regular.ttf');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "NovaMono";
+  src: url("NovaMono-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 body {
-    font-family: 'NovaMono', serif;
-    color: #eeeeee;
-    background-color: #110011;
-    text-decoration-color: #ffffff;
-    margin: auto;
-    padding: 0;
+  font-family: "NovaMono", serif;
+  color: #eeeeee;
+  background-color: #110011;
+  text-decoration-color: #ffffff;
+  margin: auto;
+  padding: 0;
 }
 .navbar {
-    overflow: hidden;
-    background-image: linear-gradient(to right, #320050, #8200C8);
-    font-family: 'Lobster', serif;
-    font-size: large;
+  overflow: hidden;
+  background-image: linear-gradient(to right, #320050, #8200c8);
+  font-family: "Lobster", serif;
+  font-size: large;
 }
 .navbar a {
-    float: left;
-    color: #eeeeee;
-    text-align: center;
-    padding: 14px 14px;
-    text-decoration: none;
-    font-size: large;
+  float: left;
+  color: #eeeeee;
+  text-align: center;
+  padding: 14px 14px;
+  text-decoration: none;
+  font-size: large;
 }
 .navbar a:hover {
-    background-color: #160025;
-    color: #ffffff;
+  background-color: #160025;
+  color: #ffffff;
 }
 .navbar a.active {
-    background-image: #222222;
-    color: #ffffff;
+  background-image: #222222;
+  color: #ffffff;
 }
 .footbar {
-    color: #ffffff;
-    background-color: #111111;
-    text-align: right;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 5px 0px;
-    font-size: 12px;
+  color: #ffffff;
+  background-color: #111111;
+  text-align: right;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 0px;
+  font-size: 12px;
 }
 .maincontainer {
-    position: absolute;
-    color: #320050;
-    font-size: medium;
-    justify-self: center;
-    background-color: rgba(255,255,255,1);
-    margin: 0% 10% 0% 10%;
-    width: 80%;
-    height: 200px;
-    border-radius: 5px;
-    box-shadow:
-        0 0 0 4px #320050;
+  position: absolute;
+  color: #320050;
+  font-size: medium;
+  background-color: rgba(255, 255, 255, 1);
+  margin: 0% 10% 0% 10%;
+  width: 80%;
+  height: 200px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 4px #320050;
 }
 .tokencontainer {
-    position: absolute;
-    color: #320050;
-    font-size: small;
-    justify-self: center;
-    background-color: rgba(255,255,255,.5);
-    margin: 0% 10% 0% 10%;
-    width: 80%;
-    height: 50px;
-    border-radius: 5px;
-    box-shadow:
-        0 0 0 4px #320050;
+  position: absolute;
+  color: #320050;
+  font-size: small;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0% 10% 0% 10%;
+  width: 80%;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 4px #320050;
 }
 .invisible {
-    display: none;
-    visibility: hidden;
+  display: none;
+  visibility: hidden;
 }
 p {
-    margin: .5% 1% .5% 1%;
+  margin: 0.5% 1% 0.5% 1%;
 }

@@ -1,72 +1,124 @@
-const express = require('express');
-const https = require('https');
-const path = require('path');
-const bodyParser = require('body-parser');
-const routes = require('./routes');
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+
+const routes = require("./routes");
+const CoinGecko = require("coingecko-api");
+const CoinGeckoJSON = require("./coins.json");
+
+const {
+  loadbtc,
+  loadeth,
+  loadbnb,
+  loadxrp,
+  loadada,
+  loaddot,
+  loaduni,
+  loadcake,
+  loadlink,
+  loaddoge,
+} = require("./loadcurrencies");
+
 const app = express();
-
-const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
-const CoinGeckoList = require('coinlist');
-const CoinGeckoJSON = require('./coins.json');
 
-console.log();
+/* -------------------- APP CONFIG -------------------- */
 
-const { loadbtc, loadeth, loadbnb, loadxrp, loadada, loaddot, loaduni, loadcake, loadlink, loaddoge } = require('./loadcurrencies');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-var payload = [{},{},{},{},{},{},{},{},{},{},{}];
-  
-app.set('views', path.join(__dirname, 'views'));
+/* -------------------- MIDDLEWARE -------------------- */
 
-app.use(express.static(path.join(__dirname, 'graphics')));
-app.use(express.static(path.join(__dirname, 'css')));
-app.use(express.static(path.join(__dirname, 'node_modules')));
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, "graphics")));
+app.use(express.static(path.join(__dirname, "css")));
 
-app.use('/', routes);
+/* -------------------- GLOBAL DATA -------------------- */
 
-loadbtc(payload); loadeth(payload); loadbnb(payload); loadxrp(payload); loadada(payload); loaddot(payload); loaduni(payload); loadcake(payload); loadlink(payload); loaddoge(payload);
+const payload = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-app.post('/screener', function(req, res) {
-  async function fetch() {
-    symbol = req.body.symbol.toLowerCase();
-    if (typeof CoinGeckoJSON.find(doc => doc.symbol == symbol) == 'undefined') {
-      res.sendFile(__dirname + "/" + "html/error.html");
-    } else {
-      await CoinGeckoClient.coins.fetch(CoinGeckoJSON.find(doc => doc.symbol == symbol).id, { tickers: false, market_data: true, community_data: false, developer_data: false, localization: false, sparkline: false }).then(obj => {
-        payload[0] = {
-          name: obj.data.name,
-          symbol: obj.data.symbol,
-          image: obj.data.image['large'],
-          price: obj.data.market_data.current_price['usd'],
-          change: obj.data.market_data.price_change_24h,
-          volume: obj.data.market_data.total_volume['usd']
-        };
-      }).catch(err => {
-        console.log(err);
-      });
-      // console.log(payload);
-      res.render('screener', {data: payload});
+loadbtc(payload);
+loadeth(payload);
+loadbnb(payload);
+loadxrp(payload);
+loadada(payload);
+loaddot(payload);
+loaduni(payload);
+loadcake(payload);
+loadlink(payload);
+loaddoge(payload);
+
+/* -------------------- ROUTES -------------------- */
+
+/**
+ * POST /screener
+ */
+app.post("/screener", async (req, res) => {
+  try {
+    if (!req.body || !req.body.symbol) {
+      return res.status(400).send("Symbol is required");
     }
-  } 
-  fetch();
+
+    const symbol = req.body.symbol.toLowerCase();
+    const coin = CoinGeckoJSON.find((doc) => doc.symbol === symbol);
+
+    if (!coin) {
+      return res.sendFile(path.join(__dirname, "html/error.html"));
+    }
+
+    const obj = await CoinGeckoClient.coins.fetch(coin.id, {
+      tickers: false,
+      market_data: true,
+      community_data: false,
+      developer_data: false,
+      localization: false,
+      sparkline: false,
+    });
+
+    payload[0] = {
+      name: obj.data.name,
+      symbol: obj.data.symbol,
+      image: obj.data.image.large,
+      price: obj.data.market_data.current_price.usd,
+      change: obj.data.market_data.price_change_24h,
+      volume: obj.data.market_data.total_volume.usd,
+    };
+
+    res.render("screener", { data: payload });
+  } catch (err) {
+    console.error("Screener error:", err);
+    res.status(500).send("Internal server error");
+  }
 });
 
-app.use('/', function(req, res, next){
+/**
+ * Other routes
+ */
+app.use("/", routes);
+
+/**
+ * 404 handler
+ */
+app.use((req, res) => {
   res.status(404);
-  if (req.accepts('html')) {
-    res.render('404', { url: req.url });
-    return;
+
+  if (req.accepts("html")) {
+    return res.render("404", { url: req.url });
   }
-  if (req.accepts('json')) {
-    res.send({ error: 'Not found' });
-    return;
+
+  if (req.accepts("json")) {
+    return res.json({ error: "Not found" });
   }
-  res.type('txt').send('Not found');
+
+  res.type("txt").send("Not found");
 });
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server listening at http://localhost:5000`)
+/* -------------------- SERVER -------------------- */
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });
